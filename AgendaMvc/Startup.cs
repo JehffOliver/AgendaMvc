@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using AgendaMvc.Data;
 
 namespace AgendaMvc
 {
@@ -33,6 +35,10 @@ namespace AgendaMvc
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbContext<AgendaMvcContext>(options =>
+                    options.UseMySql(Configuration.GetConnectionString("AgendaMvcContext"), builder =>
+                        builder.MigrationsAssembly("AgendaMvc")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
