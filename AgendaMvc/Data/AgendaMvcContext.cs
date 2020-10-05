@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using AgendaMvc.Models;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace AgendaMvc.Data
 {
@@ -14,6 +9,7 @@ namespace AgendaMvc.Data
         {
         }
 
-        public DbSet<AgendaMvc.Models.TipoContato> TipoContato { get; set; }
+        public DbSet<Models.TipoContato> TipoContato { get; set; }
+        public DbSet<Models.Contatos> Contatos{ get; set; }
     }
 }
