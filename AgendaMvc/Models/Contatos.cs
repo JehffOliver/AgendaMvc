@@ -8,14 +8,14 @@ namespace AgendaMvc.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public DateTime BirthDate { get; set; }
-        public int Tel { get; set; }
+        public string Tel { get; set; }
         public TipoContato TipoContato { get; set; }
 
         public Contatos()
         {
         }
 
-        public Contatos(int id, string name, string email, DateTime birthdate, int tel, TipoContato tipoContato)
+        public Contatos(int id, string name, string email, DateTime birthdate, string tel, TipoContato tipoContato)
         {
             Id = id;
             Name = name;
