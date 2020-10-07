@@ -8,4 +8,75 @@
 
 <p> Página de Contatos </p>
 
+<p>
+    <a asp-action="Create">Create New</a> <!--Cria um botão com link para a página Create-->
+</p>
+<!--Cria uma tabela-->
+<table class="table table-striped table-hover">
+    <!--Cabeçalho-->
+    <thead>
+        <!--Cria um cabeçalho para a tabela-->
+        <tr class="success">
+            <!--Cria uma linha para o cabeçalho-->
+            <th>
+                <!--Cria uma coluna-->
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                <!--Cria uma coluna-->
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                <!--Cria uma coluna-->
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </th>
+            <th>
+                <!--Cria uma coluna-->
+                @Html.DisplayNameFor(model => model.Tel)
+            </th>
+            <th>
+                <!--Cria uma coluna-->
+                @Html.DisplayNameFor(model => model.TipoContato)
+            </th>
+            <th>
+                <!--Cria uma coluna-->
+                <p>Opções</p>
+            </th>
+        </tr>
+    </thead>
+    <!--Corpo da Tabela-->
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <!--Cria uma linha-->
+        <tr>
+            <!--Cria uma coluna-->
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BirthDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoContato)
+            </td>
+            <!--Opções para Edição, Detalhes e Deletar-->
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+
 

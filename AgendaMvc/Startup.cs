@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using AgendaMvc.Data;
+using AgendaMvc.Services;
 
 namespace AgendaMvc
 {
@@ -41,6 +42,7 @@ namespace AgendaMvc
                         builder.MigrationsAssembly("AgendaMvc")));
 
             services.AddScoped<SeedingService>();
+            services.AddScoped<ContactService>();
 
         }
 
@@ -66,7 +68,7 @@ namespace AgendaMvc
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Contatos}/{action=Index}/{id?}");
             });
         }
     }
