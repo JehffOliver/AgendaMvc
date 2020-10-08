@@ -1,0 +1,41 @@
+﻿@model AgendaMvc.Models.Contatos
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Contatos</h4> <!--Introduz um Titilo H4-->
+
+<hr /> <!--Pula uma linha-->
+
+<div class="row"> <!--Garante que sua div ocupe o tamanho da tela-->
+    <div class="col-md-4"> <!--Ocupa 1/3 da tela.-->
+        <form asp-action="Create">
+            <!--Cria um formulario HTML, e envia o formulario chamando a ação create-->
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="BirthDate" class="control-label"></label>
+                <input asp-for="BirthDate" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Tel" class="control-label"></label>
+                <input asp-for="Tel" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

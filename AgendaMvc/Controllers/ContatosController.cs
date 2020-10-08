@@ -20,5 +20,18 @@ namespace AgendaMvc.Controllers
 
             return View(list);
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Contatos contato)
+        {
+            _service.Insert(contato);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

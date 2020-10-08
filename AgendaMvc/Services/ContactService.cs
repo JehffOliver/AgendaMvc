@@ -20,5 +20,11 @@ namespace AgendaMvc.Services
         {
             return _context.Contatos.ToList();
         }
+
+        public void Insert(Contatos obj)
+        {
+            _context.Add(obj);
+            _context.SaveChanges();
+        }
     }
 }
