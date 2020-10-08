@@ -43,6 +43,7 @@ namespace AgendaMvc
 
             services.AddScoped<SeedingService>();
             services.AddScoped<ContactService>();
+            services.AddScoped<TipoContatosService>();
 
         }
 
