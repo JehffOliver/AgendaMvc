@@ -10,6 +10,7 @@ namespace AgendaMvc.Models
         public DateTime BirthDate { get; set; }
         public string Tel { get; set; }
         public TipoContato TipoContato { get; set; }
+        public int TipoContatoId { get; set; }
 
         public Contatos()
         {

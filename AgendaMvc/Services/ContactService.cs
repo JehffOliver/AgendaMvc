@@ -23,6 +23,7 @@ namespace AgendaMvc.Services
 
         public void Insert(Contatos obj)
         {
+            obj.TipoContato = _context.TipoContato.First();
             _context.Add(obj);
             _context.SaveChanges();
         }
