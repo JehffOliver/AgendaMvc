@@ -1,0 +1,64 @@
+﻿@model AgendaMvc.Models.Contatos
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h3>Tem Certeza que deseja deletar?</h3>
+
+<div> <!--Cria uma divisao na tela.-->
+     <h4>Contato</h4> <!--Cria um título H4-->
+    <hr /> <!--Pula uma linha-->
+    <dl class="dl-horizontal">
+        <!--Lista os campos do objeto-->
+        <dt>
+            <!--Mostra o nome do campo-->
+            @Html.DisplayNameFor(Nome => Nome.Name);
+        </dt>
+        <dd>
+            <!--Mostra o valor do campo-->
+            @Html.DisplayFor(Nome => Nome.Name);
+        </dd>
+        <dt>
+            <!--Mostra o nome do campo-->
+            @Html.DisplayNameFor(Nome => Nome.Email);
+        </dt>
+        <dd>
+            <!--Mostra o valor do campo-->
+            @Html.DisplayFor(Nome => Nome.Email);
+        </dd>
+        <dt>
+            <!--Mostra o nome do campo-->
+            @Html.DisplayNameFor(Nome => Nome.BirthDate);
+        </dt>
+        <dd>
+            <!--Mostra o valor do campo-->
+            @Html.DisplayFor(Nome => Nome.BirthDate);
+        </dd>
+        <dt>
+            <!--Mostra o nome do campo-->
+            @Html.DisplayNameFor(Nome => Nome.Tel);
+        </dt>
+        <dd>
+            <!--Mostra o valor do campo-->
+            @Html.DisplayFor(Nome => Nome.Tel);
+        </dd>
+        <dt>
+            <!--Mostra o nome do campo-->
+            @Html.DisplayNameFor(Nome => Nome.TipoContato.Name);
+        </dt>
+        <dd>
+            <!--Mostra o valor do campo-->
+            @Html.DisplayFor(Nome => Nome.TipoContato.Name);
+        </dd>
+    </dl>
+
+    <form asp-action="Delete"> <!--Cria uma botão para cancelar ou deletar-->
+        <input type="hidden" asp-for="Id" /> <!--informa ao botão o ID do usuário-->
+        <input type="submit" value="Delete" class="btn-danger" /> <!--Cria uma ação de deleção-->
+        <a asp-action="Index">Voltar para a lista</a> <!--Cria um link para voltar para a lista-->
+    </form>
+</div>
+

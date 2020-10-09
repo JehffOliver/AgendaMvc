@@ -1,9 +1,11 @@
 ﻿using AgendaMvc.Data;
 using AgendaMvc.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Web;
 
 namespace AgendaMvc.Services
 {
@@ -24,6 +26,18 @@ namespace AgendaMvc.Services
         public void Insert(Contatos obj)
         {
             _context.Add(obj);
+            _context.SaveChanges();
+        }
+
+        public Contatos FindById(int id)
+        {
+            return _context.Contatos.FirstOrDefault(obj => obj.Id == id);
+        }
+
+        public void Remove(int id)
+        {
+            var obj = _context.Contatos.Find(id);
+            _context.Contatos.Remove(obj);
             _context.SaveChanges();
         }
     }

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AgendaMvc.Models;
+using AgendaMvc.Models.ViewModels;
+using AgendaMvc.Services;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AgendaMvc.Data;
-using AgendaMvc.Models;
 
 namespace AgendaMvc.Controllers
 {
