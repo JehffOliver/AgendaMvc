@@ -46,11 +46,11 @@
     </thead>
     <!--Corpo da Tabela-->
     <tbody>
-        @foreach (var item in Model)
-        {
-            <!--Cria uma linha-->
+       @foreach(var item in Model)
+       {
+           <!--Criar uma linha-->
         <tr>
-            <!--Cria uma coluna-->
+            <!--Criar uma coluna-->
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -73,7 +73,7 @@
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-        }
+       }
     </tbody>
 </table>
 
