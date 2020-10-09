@@ -1,7 +1,7 @@
 ﻿using AgendaMvc.Data;
 using AgendaMvc.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +31,7 @@ namespace AgendaMvc.Services
 
         public Contatos FindById(int id)
         {
-            return _context.Contatos.FirstOrDefault(obj => obj.Id == id);
+            return _context.Contatos.Include(obj => obj.TipoContato).FirstOrDefault(obj => obj.Id == id);
         }
 
         public void Remove(int id)

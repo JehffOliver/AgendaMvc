@@ -1,4 +1,4 @@
-﻿@model AgendaMvc.Models.Contatos
+﻿    @model AgendaMvc.Models.Contatos
 
 @{
     ViewData["Title"] = "Details";
@@ -34,9 +34,15 @@
         <dd>
             @Html.DisplayFor(model => model.Tel)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoContato.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TipoContato.Name)
+        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-default" >Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
