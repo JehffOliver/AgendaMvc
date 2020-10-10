@@ -1,11 +1,9 @@
 ﻿using AgendaMvc.Data;
 using AgendaMvc.Models;
-using Microsoft.AspNetCore.Mvc;
+using AgendaMvc.Services.Exceptions;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace AgendaMvc.Services
 {
@@ -40,5 +38,23 @@ namespace AgendaMvc.Services
             _context.Contatos.Remove(obj);
             _context.SaveChanges();
         }
+
+        public void Update(Contatos obj)
+        {
+            if(!_context.Contatos.Any(x => x.Id == obj.Id))
+            {
+                throw new NotFoundException("Id not found");
+            }
+            try
+            {
+                _context.Update(obj);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                throw new DbConcurrencyException(e.Message);
+            }
+        }      
+
     }
 }

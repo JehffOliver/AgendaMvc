@@ -17,7 +17,7 @@ namespace AgendaMvc.Services
 
         public List<TipoContato> FindAll()
         {
-            return _service.TipoContato.Include(obj => obj.Name).OrderBy(x => x.Name).ToList();
+            return _service.TipoContato.OrderBy(x => x.Name).ToList();
         }
     }
 }
