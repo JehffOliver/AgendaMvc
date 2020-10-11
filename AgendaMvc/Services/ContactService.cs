@@ -35,9 +35,15 @@ namespace AgendaMvc.Services
 
         public async Task Remove(int id)
         {
+            try { 
             var obj = await _context.Contatos.FindAsync(id);
             _context.Contatos.Remove(obj);
             await _context.SaveChangesAsync();
+            }
+            catch(DbUpdateException e)
+            {
+                throw new IntegrityException(e.Message);
+            }
         }
 
         public async Task Update(Contatos contatos)
