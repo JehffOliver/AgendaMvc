@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace AgendaMvc.Models
 {
@@ -6,9 +7,14 @@ namespace AgendaMvc.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+        [Display (Name = "Birth Date")]
+        [DataType (DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime BirthDate { get; set; }
         public string Tel { get; set; }
+        [Display (Name = "Tipo Contato")]
         public TipoContato TipoContato { get; set; }
         public int TipoContatoId { get; set; }
 

@@ -39,22 +39,22 @@ namespace AgendaMvc.Services
             _context.SaveChanges();
         }
 
-        public void Update(Contatos obj)
+        public void Update(Contatos contatos)
         {
-            if(!_context.Contatos.Any(x => x.Id == obj.Id))
+            if (!_context.Contatos.Any(x => x.Id == contatos.Id))
             {
                 throw new NotFoundException("Id not found");
             }
-            try
-            {
-                _context.Update(obj);
-                _context.SaveChanges();
+
+            try {
+                _context.Update(contatos);
+            _context.SaveChanges();
             }
             catch (DbUpdateConcurrencyException e)
             {
                 throw new DbConcurrencyException(e.Message);
             }
-        }      
+        }
 
     }
 }

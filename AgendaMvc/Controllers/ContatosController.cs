@@ -88,40 +88,30 @@ namespace AgendaMvc.Controllers
 
         public IActionResult Edit(int? id)
         {
-            if(id == null)
-            {
-                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
-            }
-
             var obj = _service.FindById(id.Value);
-            if(obj == null)
-            {
-                return RedirectToAction(nameof(Error), new { message = "Id not found" });
-            }
 
-            List<TipoContato> tipoContatos = _contatosService.FindAll();
-            ContatosFormViewModel viewModel = new ContatosFormViewModel { Contato = obj, TipoContatos = tipoContatos };
-            return View(viewModel);
-        }
-
+            return View(obj);
+        }        
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Contatos obj)
+        public IActionResult Edit(int id, Contatos contatos)
         {
-            if(id != obj.Id)
+            if(id != contatos.Id)
             {
-                return RedirectToAction(nameof(Error), new { message = "Id mismatch" });
+                return BadRequest();
             }
-
-            try
-            {
-                _service.Update(obj);
-                return RedirectToAction(nameof(Index));
+            try { 
+            _service.Update(contatos);
+            return RedirectToAction(nameof(Index));
             }
-            catch (ApplicationException e)
+            catch (NotFoundException)
             {
-                return RedirectToAction(nameof(Error), new { message = e.Message });
+                return NotFound();
+            }
+            catch (DbConcurrencyException)
+            {
+                return BadRequest();
             }
         }
 
