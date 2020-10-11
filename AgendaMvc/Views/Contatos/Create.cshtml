@@ -14,22 +14,27 @@
     <div class="col-md-4">
         <!--Ocupa 1/3 da tela.-->
         <form asp-action="Create">
+            <div asp-validation-summary="All" class="text-danger"></div>
             <!--Cria um formulario HTML, e envia o formulario chamando a ação create-->
             <div class="form-group">
                 <label asp-for="Contato.Name" class="control-label"></label>
                 <input asp-for="Contato.Name" class="form-control" />
+                <span asp-validation-for="Contato.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Contato.Email" class="control-label"></label>
                 <input asp-for="Contato.Email" class="form-control" />
+                <span asp-validation-for="Contato.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Contato.BirthDate" class="control-label"></label>
                 <input asp-for="Contato.BirthDate" class="form-control" />
+                <span asp-validation-for="Contato.BirthDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Contato.Tel" class="control-label"></label>
                 <input asp-for="Contato.Tel" class="form-control" />
+                <span asp-validation-for="Contato.Tel" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Contato.TipoContatoId" class="control-label"></label>
@@ -41,6 +46,10 @@
         </form>
     </div>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 
 
 

@@ -3,6 +3,7 @@ using AgendaMvc.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace AgendaMvc.Services
 {
@@ -15,9 +16,9 @@ namespace AgendaMvc.Services
             _service = service;
         }
 
-        public List<TipoContato> FindAll()
+        public async Task<List<TipoContato>> FindAllAsync()
         {
-            return _service.TipoContato.OrderBy(x => x.Name).ToList();
+            return await _service.TipoContato.OrderBy(x => x.Name).ToListAsync();
         }
     }
 }

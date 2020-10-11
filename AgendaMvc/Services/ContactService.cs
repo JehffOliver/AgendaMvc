@@ -4,6 +4,7 @@ using AgendaMvc.Services.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace AgendaMvc.Services
 {
@@ -16,39 +17,39 @@ namespace AgendaMvc.Services
             _context = context;
         }
 
-        public List<Contatos> FindAll()
+        public async Task<List<Contatos>> FindAllAsync()
         {
-            return _context.Contatos.ToList();
+            return await _context.Contatos.ToListAsync();
         }
 
-        public void Insert(Contatos obj)
+        public async Task InsertAsync(Contatos obj)
         {
             _context.Add(obj);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public Contatos FindById(int id)
+        public async Task<Contatos> FindByIdAsync(int id)
         {
-            return _context.Contatos.Include(obj => obj.TipoContato).FirstOrDefault(obj => obj.Id == id);
+            return await _context.Contatos.Include(obj => obj.TipoContato).FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
-        public void Remove(int id)
+        public async Task Remove(int id)
         {
-            var obj = _context.Contatos.Find(id);
+            var obj = await _context.Contatos.FindAsync(id);
             _context.Contatos.Remove(obj);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(Contatos contatos)
+        public async Task Update(Contatos contatos)
         {
-            if (!_context.Contatos.Any(x => x.Id == contatos.Id))
+            if (!await  _context.Contatos.AnyAsync(x => x.Id == contatos.Id))
             {
                 throw new NotFoundException("Id not found");
             }
 
             try {
                 _context.Update(contatos);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException e)
             {

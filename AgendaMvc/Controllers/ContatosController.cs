@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace AgendaMvc.Controllers
 {
@@ -22,36 +23,42 @@ namespace AgendaMvc.Controllers
             _contatosService = contatoService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var list = _service.FindAll();
+            var list = await _service.FindAllAsync();
 
             return View(list);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var tiposContatos = _contatosService.FindAll();
+            var tiposContatos = await _contatosService.FindAllAsync();
             var viewModel = new ContatosFormViewModel { TipoContatos = tiposContatos };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Contatos contato)
+        public async Task<IActionResult> Create(Contatos contato)
         {
-            _service.Insert(contato);
+            if (!ModelState.IsValid)
+            {
+                var tipocontato = await _contatosService.FindAllAsync();
+                var viewModel = new ContatosFormViewModel { Contato = contato, TipoContatos = tipocontato };
+                return View(contato);
+            }
+            await _service.InsertAsync(contato);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if(id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not provided" });
             }
 
-            var obj = _service.FindById(id.Value);
+            var obj = await _service.FindByIdAsync(id.Value);
             if(obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not found" });
@@ -63,21 +70,21 @@ namespace AgendaMvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _service.Remove(id);
+            await _service.Remove(id);
             return RedirectToAction(nameof(Index));
         }
 
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> DetailsAsync(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not provided" });
             }
 
-            var obj = _service.FindById(id.Value);
+            var obj = await _service.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not found" });
@@ -86,23 +93,29 @@ namespace AgendaMvc.Controllers
             return View(obj);
         }
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> EditAsync(int? id)
         {
-            var obj = _service.FindById(id.Value);
+            var obj = await _service.FindByIdAsync(id.Value);
 
             return View(obj);
         }        
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Contatos contatos)
+        public async Task<IActionResult> EditAsync(int id, Contatos contatos)
         {
-            if(id != contatos.Id)
+            if (!ModelState.IsValid)
+            {
+                var tipocontato = await _contatosService.FindAllAsync();
+                var viewModel = new ContatosFormViewModel { Contato = contatos, TipoContatos = tipocontato };
+                return View(contatos);
+            }
+            if (id != contatos.Id)
             {
                 return BadRequest();
             }
             try { 
-            _service.Update(contatos);
+            await _service.Update(contatos);
             return RedirectToAction(nameof(Index));
             }
             catch (NotFoundException)
